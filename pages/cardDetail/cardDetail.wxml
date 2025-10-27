@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="card">
+    <view class="name">{{name}}</view>
+    <view class="title">{{title}}</view>
+    <view class="company">{{company}}</view>
+
+    <view class="info">
+      <view>📱 手机：{{tel_cell}}</view>
+      <view wx:if="{{tel_work}}">☎️ 座机：{{tel_work}}</view>
+      <view wx:if="{{email}}">📧 邮箱：{{email}}</view>
+      <view wx:if="{{addr}}">🏢 地址：{{addr}}</view>
+    </view>
+  </view>
+
+  <view class="btn-group">
+    <button type="primary" bindtap="saveToContacts">保存到通讯录</button>
+    <button bindtap="generateQRCode">生成二维码</button>
+  </view>
+</view>

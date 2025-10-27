@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cardDetail/cardDetail",
+    "pages/qrcode/qrcode"
+  ],
+  "window": {
+    "navigationBarTitleText": "名片识别助手",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light"
+  }
+}

@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="title">📇 上传或拍照名片</view>
+
+  <button type="primary" bindtap="chooseImage">选择或拍照</button>
+
+  <image wx:if="{{imagePath}}" src="{{imagePath}}" mode="widthFix" class="preview"></image>
+
+  <button wx:if="{{imagePath}}" type="warn" bindtap="uploadImage">开始识别</button>
+
+  <view wx:if="{{loading}}" class="loading">识别中，请稍候...</view>
+</view>

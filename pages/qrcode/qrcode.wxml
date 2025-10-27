@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card">
+    <view class="title">电子名片二维码</view>
+    <canvas canvas-id="myQrcode" class="qrcode"></canvas>
+    <view class="name">{{name}}</view>
+    <view class="company">{{company}}</view>
+  </view>
+
+  <view class="btn-group">
+    <button bindtap="saveImage">保存二维码</button>
+    <button open-type="share">分享名片</button>
+  </view>
+</view>

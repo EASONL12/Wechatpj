@@ -1,0 +1,7 @@
+.container { padding: 30rpx; }
+.card { background-color: #fff; border-radius: 24rpx; padding: 40rpx; margin-bottom: 40rpx; box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.05); }
+.name { font-size: 48rpx; font-weight: bold; color: #333; }
+.title { color: #666; margin-top: 10rpx; font-size: 32rpx; }
+.company { color: #007aff; font-size: 34rpx; font-weight: 500; margin: 20rpx 0; }
+.info view { margin: 12rpx 0; color: #444; font-size: 30rpx; }
+.btn-group { display: flex; justify-content: space-around; }
