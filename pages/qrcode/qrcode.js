@@ -9,7 +9,7 @@ Page({
 
     this.setData({ name: data.name, company: data.company, jsonData: jsonStr });
 
-    drawQrcode({ width:400, height:400, canvasId:'myQrcode', text: jsonStr });
+    drawQrcode({ width:200, height:200, canvasId:'myQrcode', text: jsonStr });
   },
 
   saveImage() {
