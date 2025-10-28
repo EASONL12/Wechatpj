@@ -1,16 +1,25 @@
 Page({
-  data: { name: "", company: "", title: "", tel_cell: "", tel_work: "", email: "", addr: "" },
+  data: { 
+    name: "", 
+    company: "", 
+    title: "", 
+    tel_cell: "", 
+    tel_work: "", 
+    email: "", 
+    addr: "" 
+  },
 
   onLoad(options) {
     const jsonData = JSON.parse(decodeURIComponent(options.data));
+
     this.setData({
       name: jsonData.name || "",
-      company: jsonData.company?.[0] || "",
-      title: jsonData.title?.[0] || "",
-      tel_cell: jsonData.tel_cell?.[0] || "",
-      tel_work: jsonData.tel_work?.[0] || "",
-      email: jsonData.email?.join(" / ") || "",
-      addr: jsonData.addr?.[0] || ""
+      company: Array.isArray(jsonData.company) ? jsonData.company[0] : jsonData.company || "",
+      title: Array.isArray(jsonData.title) ? jsonData.title[0] : jsonData.title || "",
+      tel_cell: Array.isArray(jsonData.tel_cell) ? jsonData.tel_cell[0] : jsonData.tel_cell || "",
+      tel_work: Array.isArray(jsonData.tel_work) ? jsonData.tel_work[0] : jsonData.tel_work || "",
+      email: Array.isArray(jsonData.email) ? jsonData.email.join(" / ") : jsonData.email || "",
+      addr: Array.isArray(jsonData.addr) ? jsonData.addr[0] : jsonData.addr || ""
     });
   },
 

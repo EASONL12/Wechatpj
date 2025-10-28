@@ -38,5 +38,28 @@ Page({
     wx.navigateTo({
       url: `/pages/cardDetail/cardDetail?data=${encodeURIComponent(JSON.stringify(data))}`,
     });
+  },
+
+  // 扫描二维码
+  scanQRCode() {
+    wx.scanCode({
+      onlyFromCamera: false, // 允许相册或摄像头扫描
+      success: (res) => {
+        let data;
+        try {
+          data = JSON.parse(res.result); // 假设二维码存的是 JSON 格式名片
+        } catch (err) {
+          wx.showToast({ title: '二维码不是名片信息', icon: 'error' });
+          return;
+        }
+
+        wx.navigateTo({
+          url: `/pages/cardDetail/cardDetail?data=${encodeURIComponent(JSON.stringify(data))}`
+        });
+      },
+      fail: () => {
+        wx.showToast({ title: '扫描失败', icon: 'error' });
+      }
+    });
   }
 });
