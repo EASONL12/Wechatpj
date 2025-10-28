@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="form">
+    <input placeholder="姓名" bindinput="onInput" data-field="name" value="{{name}}" />
+    <input placeholder="公司" bindinput="onInput" data-field="company" value="{{company}}" />
+    <input placeholder="职位" bindinput="onInput" data-field="title" value="{{title}}" />
+    <input placeholder="手机号码" bindinput="onInput" data-field="tel" value="{{tel}}" />
+    <input placeholder="邮箱" bindinput="onInput" data-field="email" value="{{email}}" />
+    <input placeholder="地址" bindinput="onInput" data-field="addr" value="{{addr}}" />
+  </view>
+
+  <button class="generate-btn" bindtap="generateQRCode">生成我的二维码</button>
+</view>
