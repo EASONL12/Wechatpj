@@ -13,42 +13,55 @@ Page({
     });
   },
 
-  // 上传图片 → 使用模拟数据（前端测试用）
+  // 上传图片 → 调用本地后端
   uploadImage() {
     if (!this.data.imagePath) return;
     this.setData({ loading: true });
 
-    // 模拟 OCR 识别结果
-    const data = {
-      tel_cell: ["18601130863"],
-      success: true,
-      name: "雷军",
-      company: ["小米科技有限责任公司"],
-      addr: ["北京市海淀区清河中街68号华润五彩城写字楼"],
-      department: [],
-      title: ["董事长"],
-      request_id: "4B57639A-E914-4F2A-86EE-908ACABF7E57",
-      email: ["leijun@gmail.com","leijunoxinomi.com"],
-      tel_work: ["01060606666-8008"]
-    };
+    const fs = wx.getFileSystemManager();
+    fs.readFile({
+      filePath: this.data.imagePath,
+      encoding: 'base64',
+      success: (res) => {
+        const imageBase64 = res.data;
 
-    this.setData({ loading: false });
-
-    // 跳转到名片详情页
-    wx.navigateTo({
-      url: `/pages/cardDetail/cardDetail?data=${encodeURIComponent(JSON.stringify(data))}`,
+        wx.request({
+          url: 'http://192.168.3.41:8000/ocr_card', // 例如 http://192.168.1.100:8000/ocr_card
+          method: 'POST',
+          header: { 'content-type': 'application/json' },
+          data: { image: imageBase64 },
+          success: (response) => {
+            const result = response.data;
+            if (result.success) {
+              wx.navigateTo({
+                url: `/pages/cardDetail/cardDetail?data=${encodeURIComponent(JSON.stringify(result.data))}`,
+              });
+            } else {
+              wx.showToast({ title: '识别失败', icon: 'error' });
+            }
+          },
+          fail: () => {
+            wx.showToast({ title: '请求失败', icon: 'error' });
+          },
+          complete: () => this.setData({ loading: false }),
+        });
+      },
+      fail: () => {
+        wx.showToast({ title: '读取图片失败', icon: 'error' });
+        this.setData({ loading: false });
+      }
     });
   },
 
   // 扫描二维码
   scanQRCode() {
     wx.scanCode({
-      onlyFromCamera: false, // 允许相册或摄像头扫描
+      onlyFromCamera: false,
       success: (res) => {
         let data;
         try {
-          data = JSON.parse(res.result); // 假设二维码存的是 JSON 格式名片
-        } catch (err) {
+          data = JSON.parse(res.result);
+        } catch {
           wx.showToast({ title: '二维码不是名片信息', icon: 'error' });
           return;
         }
